@@ -669,6 +669,257 @@ const QUOTE_LIBRARY = [
     text: "Be silent or let thy words be worth more than silence.",
     author: "Pythagoras",
     category: "Self-Mastery"
+  },
+  // New New additions
+  {
+    text: "How long are you going to wait before you demand the best for yourself?",
+    author: "Epictetus",
+    category: "Stoicism"
+  },
+  {
+    text: "Luck is what happens when preparation meets opportunity.",
+    author: "Seneca",
+    category: "Action"
+  },
+  {
+    text: "The soul becomes dyed with the color of its thoughts.",
+    author: "Marcus Aurelius",
+    category: "Stoicism"
+  },
+  {
+    text: "Do not spoil what you have by desiring what you have not.",
+    author: "Epicurus",
+    category: "Contentment"
+  },
+  {
+    text: "First say to yourself what you would be; and then do what you have to do.",
+    author: "Epictetus",
+    category: "Identity & Habits"
+  },
+  {
+    text: "No man steps in the same river twice, for it is not the same river and he is not the same man.",
+    author: "Heraclitus",
+    category: "Reflection"
+  },
+  {
+    text: "Character is fate.",
+    author: "Heraclitus",
+    category: "Identity & Habits"
+  },
+  {
+    text: "He suffers more than necessary, who suffers before it is necessary.",
+    author: "Seneca",
+    category: "Stoicism"
+  },
+  {
+    text: "If a man knows not to which port he sails, no wind is favorable.",
+    author: "Seneca",
+    category: "Purpose"
+  },
+  {
+    text: "Difficulty shows what men are.",
+    author: "Epictetus",
+    category: "Resilience"
+  },
+  {
+    text: "Do every act of your life as though it were the very last act of your life.",
+    author: "Marcus Aurelius",
+    category: "Stoicism"
+  },
+  {
+    text: "A man who has committed a mistake and doesn’t correct it is committing another mistake.",
+    author: "Confucius",
+    category: "Self-Mastery"
+  },
+  {
+    text: "To know what you know and what you do not know, that is true knowledge.",
+    author: "Confucius",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Knowing others is intelligence; knowing yourself is true wisdom.",
+    author: "Lao Tzu",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Mastering others is strength; mastering yourself is true power.",
+    author: "Lao Tzu",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Care about what other people think and you will always be their prisoner.",
+    author: "Lao Tzu",
+    category: "Stoicism"
+  },
+  {
+    text: "Nature does not hurry, yet everything is accomplished.",
+    author: "Lao Tzu",
+    category: "Reflection"
+  },
+  {
+    text: "The impediment to action advances action. What stands in the way becomes the way.",
+    author: "Marcus Aurelius",
+    category: "Resilience"
+  },
+  {
+    text: "Begin at once to live, and count each separate day as a separate life.",
+    author: "Seneca",
+    category: "Stoicism"
+  },
+  {
+    text: "Very little is needed to make a happy life.",
+    author: "Marcus Aurelius",
+    category: "Contentment"
+  },
+  {
+    text: "He who fears death will never do anything worthy of a living man.",
+    author: "Seneca",
+    category: "Courage"
+  },
+  {
+    text: "The more we value things outside our control, the less control we have.",
+    author: "Epictetus",
+    category: "Stoicism"
+  },
+  {
+    text: "Man conquers the world by conquering himself.",
+    author: "Zeno of Citium",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Better to trip with the feet than with the tongue.",
+    author: "Zeno of Citium",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Silence is a lesson learned from the many sufferings of life.",
+    author: "Seneca",
+    category: "Self-Mastery"
+  },
+  {
+    text: "To bear trials with a calm mind robs misfortune of its strength and burden.",
+    author: "Seneca",
+    category: "Resilience"
+  },
+  {
+    text: "You become what you give your attention to.",
+    author: "Epictetus",
+    category: "Identity & Habits"
+  },
+  {
+    text: "Nothing strengthens authority so much as silence.",
+    author: "Leonardo da Vinci",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Iron rusts from disuse; water loses its purity from stagnation.",
+    author: "Leonardo da Vinci",
+    category: "Discipline"
+  },
+  {
+    text: "The greatest deception men suffer is from their own opinions.",
+    author: "Leonardo da Vinci",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Anxiety is the dizziness of freedom.",
+    author: "Søren Kierkegaard",
+    category: "Faith & Reflection"
+  },
+  {
+    text: "Life can only be understood backwards; but it must be lived forwards.",
+    author: "Søren Kierkegaard",
+    category: "Reflection"
+  },
+  {
+    text: "People demand freedom of speech as a compensation for the freedom of thought which they seldom use.",
+    author: "Søren Kierkegaard",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Compare yourself to who you were yesterday, not to who someone else is today.",
+    author: "Jordan Peterson",
+    category: "Identity & Habits"
+  },
+  {
+    text: "The purpose of life is finding the largest burden that you can bear and bearing it.",
+    author: "Jordan Peterson",
+    category: "Purpose"
+  },
+  {
+    text: "Order your soul. Reduce your wants.",
+    author: "Augustine",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Patience is the companion of wisdom.",
+    author: "Augustine",
+    category: "Wisdom"
+  },
+  {
+    text: "He who is not a good servant will not be a good master.",
+    author: "Plato",
+    category: "Leadership"
+  },
+  {
+    text: "The first and greatest victory is to conquer yourself.",
+    author: "Plato",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Courage is knowing what not to fear.",
+    author: "Plato",
+    category: "Courage"
+  },
+  {
+    text: "The direction in which education starts a man will determine his future life.",
+    author: "Plato",
+    category: "Identity & Habits"
+  },
+  {
+    text: "No great thing is created suddenly.",
+    author: "Epictetus",
+    category: "Discipline"
+  },
+  {
+    text: "Freedom is secured not by the fulfilling of desires, but by the removal of desire.",
+    author: "Epictetus",
+    category: "Stoicism"
+  },
+  {
+    text: "To complain is always nonacceptance of what is.",
+    author: "Eckhart Tolle",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Awareness is the greatest agent for change.",
+    author: "Eckhart Tolle",
+    category: "Self-Mastery"
+  },
+  {
+    text: "Wherever you are, be there totally.",
+    author: "Eckhart Tolle",
+    category: "Presence"
+  },
+  {
+    text: "Discipline equals freedom.",
+    author: "Jocko Willink",
+    category: "Discipline"
+  },
+  {
+    text: "The desire for more positive experience is itself a negative experience.",
+    author: "Mark Manson",
+    category: "Reflection"
+  },
+  {
+    text: "Who you are is defined by what you’re willing to struggle for.",
+    author: "Mark Manson",
+    category: "Purpose"
+  },
+  {
+    text: "Every action you take is a vote for the type of person you wish to become.",
+    author: "James Clear",
+    category: "Identity & Habits"
   }
 ];
 
