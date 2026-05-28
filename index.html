@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Atoms of Grit - 3-Tier Goals Tracker</title>
+  <!-- SEO & Web App Tags -->
+  <meta name="description" content="Atoms of Grit - A premium personal compass and goals tracker implementing the 3-tier goal hierarchy from Grit across Spiritual, Family, Academic, and Hobby domains.">
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- PWA Standalone Support (100% Free Mobile App Setup) -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Atoms of Grit">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23FAF8F5'><path d='M50 50 A 4 4 0 0 0 50 42 A 8 8 0 0 0 42 50 A 16 16 0 0 0 58 58 A 32 32 0 0 0 62 18 A 64 64 0 0 0 2 62 A 96 96 0 0 0 98 98' stroke='%23ea580c' stroke-width='6' stroke-linecap='round' fill='none'/></svg>">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('Service Worker registered successfully!', reg.scope))
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Background SVG Gradient Definitions -->
+  <svg style="width:0; height:0; position:absolute;" aria-hidden="true">
+    <defs>
+      <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#a855f7" />
+        <stop offset="100%" stop-color="#6366f1" />
+      </linearGradient>
+      <linearGradient id="progress-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#a855f7" />
+        <stop offset="100%" stop-color="#6366f1" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Toast Notification Area -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-section">
+        <!-- Minimalist Clean Mathematical Fibonacci Golden Spiral Logo -->
+        <svg viewBox="0 0 100 100" fill="none">
+          <!-- Parametric Spiral Arc Curve -->
+          <path d="M50 50 
+                   A 3.8 3.8 0 0 0 50 42.4
+                   A 7.6 7.6 0 0 0 42.4 50
+                   A 15.2 15.2 0 0 0 57.6 57.6
+                   A 30.4 30.4 0 0 0 61.8 19.6
+                   A 60.8 60.8 0 0 0 2 61.8
+                   A 96 96 0 0 0 98 98" 
+                stroke="url(#logo-grad)" 
+                stroke-width="5" 
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <h1 class="logo-text">Atoms of Grit</h1>
+          <div class="logo-subtitle">A Changeless Core</div>
+        </div>
+      </div>
+      
+      <!-- Daily SVG Completion Progress Ring -->
+      <div id="header-progress" class="header-progress glass">
+        <div class="progress-ring-container">
+          <svg class="progress-ring" width="48" height="48">
+            <circle class="progress-ring-circle-bg" stroke-width="4" fill="transparent" r="20" cx="24" cy="24"/>
+            <circle id="progress-ring-circle" class="progress-ring-circle" stroke-width="4" fill="transparent" r="20" cx="24" cy="24" stroke-dasharray="125.66" stroke-dashoffset="125.66"/>
+          </svg>
+          <div id="progress-percentage" class="progress-percentage">0%</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Floating Calendar Slider (Visible on Today Tab) -->
+  <div id="calendar-bar" class="calendar-slider glass">
+    <!-- Days dynamically generated in JS -->
+  </div>
+
+  <!-- Quote of the Day Section (Visible on Today Tab) -->
+  <div id="quote-section" class="quote-container">
+    <div class="quote-card glass">
+      <p id="quote-text" class="quote-text font-serif">"The function of prayer is not to influence God, but rather to change the nature of the one who prays."</p>
+      <div class="quote-meta">
+        <div id="quote-author" class="quote-author">Søren Kierkegaard</div>
+        <div class="quote-actions">
+          <button id="favorite-quote-btn" class="quote-btn" title="Add to Favorites" aria-label="Favorite Quote">
+            <i data-lucide="heart"></i>
+          </button>
+          <button id="next-quote-btn" class="quote-btn" title="Seek Wisdom (New Quote)" aria-label="Next Quote">
+            <i data-lucide="compass"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPA Core View Panel -->
+  <main>
+    
+    <!-- 1. TODAY VIEW (DAILY LOW-LEVEL HABITS CHECKLIST) -->
+    <section id="view-today" class="view-panel active">
+      <div class="today-sections">
+        
+        <!-- Morning Routines -->
+        <div class="routine-group" id="routine-morning-group">
+          <div class="today-header">
+            <h2><i data-lucide="sunrise" style="stroke: #fda4af;"></i> Morning</h2>
+            <span id="morning-count" class="count-pill">0 / 0</span>
+          </div>
+          <div class="habits-grid" id="habits-morning-container">
+            <!-- Habit cards populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Afternoon Routines -->
+        <div class="routine-group" id="routine-afternoon-group">
+          <div class="today-header">
+            <h2><i data-lucide="sun" style="stroke: #38bdf8;"></i> Afternoon</h2>
+            <span id="afternoon-count" class="count-pill">0 / 0</span>
+          </div>
+          <div class="habits-grid" id="habits-afternoon-container">
+            <!-- Habit cards populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Evening Routines -->
+        <div class="routine-group" id="routine-evening-group">
+          <div class="today-header">
+            <h2><i data-lucide="sunset" style="stroke: #c084fc;"></i> Evening</h2>
+            <span id="evening-count" class="count-pill">0 / 0</span>
+          </div>
+          <div class="habits-grid" id="habits-evening-container">
+            <!-- Habit cards populated dynamically -->
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- 2. GRIT GOALS VIEW (3-TIER HIERARCHICAL TREE) -->
+    <section id="view-goals" class="view-panel">
+      <!-- Domain Filter Tabs -->
+      <div class="domains-selector">
+        <div class="domain-tab active spiritual" data-domain="Spiritual">Spiritual</div>
+        <div class="domain-tab family" data-domain="Family">Family</div>
+        <div class="domain-tab academic" data-domain="Academic">Professional & Academic</div>
+        <div class="domain-tab hobby" data-domain="Hobby">Hobby & Extracurricular</div>
+      </div>
+
+      <!-- The Grit Goal Hierarchical Tree -->
+      <div class="grit-tree-container" id="grit-tree-container">
+        
+        <!-- Top Level Goal Section -->
+        <div class="tree-section">
+          <div class="tree-section-header">Top-Level Goal (Your Ultimate Compass)</div>
+          <div id="tree-top-container">
+            <!-- Preseeded dynamically -->
+          </div>
+        </div>
+
+        <!-- Mid Level Goal Section -->
+        <div class="tree-section">
+          <div class="tree-section-header">Mid-Level Goals (Your Milestones)</div>
+          <div class="mid-level-grid" id="tree-mid-container">
+            <!-- Preseeded dynamically -->
+          </div>
+        </div>
+
+        <!-- Low Level Goal Section -->
+        <div class="tree-section">
+          <div class="tree-section-header">Low-Level Goals (Your Daily Actions)</div>
+          <div class="low-level-tree-grid" id="tree-low-container">
+            <!-- Preseeded dynamically -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. PERSONAL MISSION STATEMENT VIEW -->
+    <section id="view-mission" class="view-panel">
+      <div class="mission-container">
+        <div class="mission-card glass">
+          <h2 class="mission-title">Personal Mission Statement</h2>
+          <div id="mission-body" class="mission-body">
+            <!-- Seeded beautifully from document -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PROGRESS ANALYTICS VIEW -->
+    <section id="view-analytics" class="view-panel">
+      
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card glass">
+          <div id="stat-active-streak" class="stat-val">0</div>
+          <div class="stat-label">Active Streak</div>
+        </div>
+        <div class="stat-card glass">
+          <div id="stat-best-streak" class="stat-val">0</div>
+          <div class="stat-label">Best Streak</div>
+        </div>
+        <div class="stat-card glass">
+          <div id="stat-completions" class="stat-val">0</div>
+          <div class="stat-label">Completions</div>
+        </div>
+        <div class="stat-card glass">
+          <div id="stat-alignment" class="stat-val">0%</div>
+          <div class="stat-label">Grit Alignment</div>
+        </div>
+      </div>
+
+      <!-- Completion Heatmap Grid -->
+      <div class="heatmap-card glass">
+        <div class="today-header">
+          <h2><i data-lucide="calendar-range" style="stroke: #c084fc;"></i> Monthly Progress</h2>
+        </div>
+        <div class="heatmap-container">
+          <div class="heatmap-grid" id="heatmap-grid">
+            <!-- Heatmap days generated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- List of Liked/Favorite Quotes -->
+      <div id="liked-quotes-group" class="routine-group" style="display:none; margin-top:2rem;">
+        <div class="today-header">
+          <h2><i data-lucide="heart" style="stroke: #f43f5e; fill: rgba(244,63,94,0.1)"></i> Favorite Philosophical Quotes</h2>
+        </div>
+        <div class="habits-grid" id="liked-quotes-container" style="grid-template-columns:1fr; gap:1rem;">
+          <!-- Liked quotes list -->
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Floating Mobile Create FAB Button -->
+  <button id="global-add-btn" class="fab-btn" title="Create New Goal or Habit" aria-label="Add Action">
+    <i data-lucide="plus"></i>
+  </button>
+
+  <!-- Floating Glass Bottom Navigation Bar -->
+  <div class="nav-bar-container">
+    <nav class="nav-bar glass">
+      <button class="nav-item active" data-target="view-today">
+        <i data-lucide="check-square"></i>
+        <span>Today</span>
+      </button>
+      <button class="nav-item" data-target="view-goals">
+        <i data-lucide="git-branch"></i>
+        <span>Grit Tree</span>
+      </button>
+      <button class="nav-item" data-target="view-mission">
+        <i data-lucide="bookmark"></i>
+        <span>Mission</span>
+      </button>
+      <button class="nav-item" data-target="view-analytics">
+        <i data-lucide="bar-chart-2"></i>
+        <span>Analytics</span>
+      </button>
+    </nav>
+  </div>
+
+
+  <!-- ADD/EDIT GOAL OR HABIT DIALOG MODAL -->
+  <div class="modal-overlay" id="goal-modal">
+    <div class="modal-box glass">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Create Action</h3>
+        <button class="close-btn" id="modal-close-btn" title="Close" aria-label="Close modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      
+      <form id="goal-form" onsubmit="return false;">
+        <!-- Input ID (Hidden for Editing) -->
+        <input type="hidden" id="form-item-id">
+        
+        <!-- Goal Tier Picker -->
+        <div class="form-group">
+          <label class="form-label" for="form-item-tier">Goal Tier</label>
+          <select id="form-item-tier" class="form-select">
+            <option value="low">Low-Level Goal (Daily/Weekly Habit)</option>
+            <option value="mid">Mid-Level Goal (Milestone)</option>
+            <option value="top">Top-Level Goal (Ultimate Compass)</option>
+          </select>
+        </div>
+
+        <!-- Life Domain Picker -->
+        <div class="form-group">
+          <label class="form-label" for="form-item-domain">Life Domain</label>
+          <select id="form-item-domain" class="form-select">
+            <option value="Spiritual">Spiritual (Faith, Integrity)</option>
+            <option value="Family">Family (Wife, Parents, Friends)</option>
+            <option value="Academic">Professional & Academic (PHD, Math, Deep Work)</option>
+            <option value="Hobby">Hobby & Extracurricular (Music, Snowboard, Gym)</option>
+          </select>
+        </div>
+
+        <!-- Title -->
+        <div class="form-group">
+          <label class="form-label" for="form-item-title" id="label-title">Action Name / Goal Title</label>
+          <input type="text" id="form-item-title" class="form-input" placeholder="e.g., Read the BOM daily first thing" required>
+        </div>
+
+        <!-- Parent Goal Connector (Only visible for Low & Mid tiers) -->
+        <div class="form-group" id="parent-connector-group">
+          <label class="form-label" for="form-item-parent" id="label-parent">Supports Mid-Level Milestone</label>
+          <select id="form-item-parent" class="form-select">
+            <!-- Populated dynamically via JS based on selected Domain -->
+          </select>
+        </div>
+
+        <!-- Routine Details (Only visible for Low-Level habits) -->
+        <div id="low-level-details-group">
+          
+          <div class="form-row">
+            <!-- Time of Day -->
+            <div class="form-group">
+              <label class="form-label" for="form-item-timeofday">Time of Day</label>
+              <select id="form-item-timeofday" class="form-select">
+                <option value="morning">Morning 🌅</option>
+                <option value="afternoon">Afternoon ☀️</option>
+                <option value="evening">Evening 🌙</option>
+              </select>
+            </div>
+            
+            <!-- Reminder Time -->
+            <div class="form-group">
+              <label class="form-label" for="form-item-reminder">Reminder Time (Optional)</label>
+              <input type="time" id="form-item-reminder" class="form-input">
+            </div>
+          </div>
+
+          <!-- Weekly Schedule Days -->
+          <div class="form-group">
+            <label class="form-label">Days to Repeat</label>
+            <div class="weekday-picker" id="form-weekday-picker">
+              <button type="button" class="weekday-btn active" data-day="0">S</button>
+              <button type="button" class="weekday-btn active" data-day="1">M</button>
+              <button type="button" class="weekday-btn active" data-day="2">T</button>
+              <button type="button" class="weekday-btn active" data-day="3">W</button>
+              <button type="button" class="weekday-btn active" data-day="4">T</button>
+              <button type="button" class="weekday-btn active" data-day="5">F</button>
+              <button type="button" class="weekday-btn active" data-day="6">S</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Form Action Buttons -->
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" id="modal-cancel-btn">Cancel</button>
+          <button type="submit" class="btn-primary" id="modal-save-btn">Save Action</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading local scripts -->
+  <script src="quotes.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
