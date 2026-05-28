@@ -15,7 +15,6 @@ const DEFAULT_MISSION_HTML = `
     <li><strong>External Validation:</strong> Moving away from gaining self-value from reputation, comparisons, smartness, or approvals. Cultivating a deep inner scorecard.</li>
     <li><strong>Motives of Action:</strong> Doing the right things with the right motives (e.g., teaching to lift and bless others, rather than to look competent).</li>
     <li><strong>Emotional Subordination:</strong> Acting as an agent of change, not a victim of circumstance. Subordinating temporary feelings and emotions to deep commitments and principles.</li>
-    <li><strong>Rejection Recovery:</strong> When feelings are not reciprocated, maintaining absolute inner confidence and commitment to self-improvement. Loving my future self in the now.</li>
   </ul>
 
   <h3 class="mission-section-title">Core Principles of Character</h3>
